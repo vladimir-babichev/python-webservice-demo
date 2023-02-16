@@ -1,0 +1,41 @@
+{
+  extends: [
+    ":dependencyDashboard",
+    ":enablePreCommit",
+    ":enableRenovate",
+    ":semanticCommits",
+    ":separatePatchReleases",
+    "docker:enableMajor",
+  ],
+  suppressNotifications: ["prIgnoreNotification"],
+  bumpVersion: "minor",
+  kubernetes: {
+    fileMatch: ["\\.yaml$"],
+    ignorePaths: [".github"],
+  },
+  argocd: {
+    fileMatch: ["k8s/.+/apps/.+\\.yaml$"],
+  },
+  packageRules: [
+    // Setup datasources
+    {
+      datasources: ["helm"],
+      commitMessageTopic: "Helm chart {{depName}}",
+      semanticCommitScope: "charts",
+      separateMinorPatch: true,
+      ignoreDeprecated: true,
+    },
+    {
+      datasources: ["docker"],
+      commitMessageTopic: "Docker image {{depName}}",
+      commitMessageExtra: "to {{#if isSingleVersion}}{{{toVersion}}}{{else}}{{{newValue}}}{{/if}}",
+      updateTypes: ["major", "minor", "patch"],
+      enabled: true,
+    },
+    {
+      matchDatasources: ["docker"],
+      semanticCommitScope: "images",
+      separateMinorPatch: true,
+    },
+  ],
+}
