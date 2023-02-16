@@ -5,9 +5,9 @@ services:
     build:
       context: .
       args:
-      - "UID=${UID:-1000}"
-      - "GID=${GID:-1000}"
-      - "FLASK_DEBUG=${FLASK_DEBUG:-false}"
+        - "UID=${UID:-1000}"
+        - "GID=${GID:-1000}"
+        - "FLASK_DEBUG=${FLASK_DEBUG:-false}"
     env_file:
       - .env
     environment:
