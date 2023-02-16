@@ -1,11 +1,10 @@
 from datetime import date, datetime
 
+from app.database import db
+from app.models import User
 from flask import request
 from flask_restful import Resource
 from sqlalchemy.sql import text
-
-from app.database import db
-from app.models import User
 
 
 class UserAPI(Resource):

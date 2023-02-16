@@ -5,7 +5,7 @@ env:
   APP_NAME: python-webservice-demo
   APP_VERSION:
     sh: |
-      cat {{ .ROOT_DIR }}/src/VERSION
+      cat {{ .ROOT_DIR }}/app/VERSION
 
 tasks:
   precommit:
@@ -21,24 +21,24 @@ tasks:
   unittest:
     desc: Run application unit tests
     cmds:
-      - cd {{ .ROOT_DIR }}/src && python -m unittest discover
+      - cd {{ .ROOT_DIR }}/app && python -m unittest discover
 
   build:
     desc: Build Docker Image
     cmds:
-      - docker build -t {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }} {{ .ROOT_DIR }}/src
+      - docker build -t {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }} {{ .ROOT_DIR }}/app
 
   up:
     desc: docker-compose up
     cmds:
-      - docker-compose --project-directory {{ .ROOT_DIR }}/src up -d {{ .CLI_ARGS }}
+      - docker-compose --project-directory {{ .ROOT_DIR }}/app up -d {{ .CLI_ARGS }}
 
   down:
     desc: docker-compose down
     cmds:
-      - docker-compose --project-directory {{ .ROOT_DIR }}/src down {{ .CLI_ARGS }}
+      - docker-compose --project-directory {{ .ROOT_DIR }}/app down {{ .CLI_ARGS }}
 
   logs:
     desc: docker-compose logs
     cmds:
-      - docker-compose --project-directory {{ .ROOT_DIR }}/src logs {{ .CLI_ARGS }}
+      - docker-compose --project-directory {{ .ROOT_DIR }}/app logs {{ .CLI_ARGS }}

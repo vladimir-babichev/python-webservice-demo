@@ -1,8 +1,7 @@
-from flask import Flask
-from flask_restful import Api
-
 from app.api import Status, UserAPI
 from app.database import db
+from flask import Flask
+from flask_restful import Api
 
 
 def create_app():

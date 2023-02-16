@@ -35,7 +35,7 @@ jobs:
 
       - name: Install pip dependencies
         run: |
-          pip install -r src/requirements.txt
+          pip install -r app/requirements.txt
           pip install pre-commit
 
       - name: Run pre-commit

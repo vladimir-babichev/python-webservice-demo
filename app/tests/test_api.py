@@ -2,11 +2,11 @@ import json
 import unittest
 from datetime import date, timedelta
 
+from app.database import db
+from app.models import User
 from dateutil.relativedelta import relativedelta
 
 from app.app import create_app
-from app.database import db
-from app.models import User
 
 
 class UserAPITestCase(unittest.TestCase):
