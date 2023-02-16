@@ -8,6 +8,25 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+
+  {{- $strategy := default "Recreate" .Values.deploymentStrategy.type }}
+  {{- if and (ne $strategy "Recreate") (ne $strategy "RollingUpdate") }}
+    {{- fail (printf "Not a valid strategy type for Deployment (%s)" $strategy) }}
+  {{- end }}
+  strategy:
+    type: {{ $strategy }}
+    {{- with .Values.deploymentStrategy.rollingUpdate }}
+      {{- if and (eq $strategy "RollingUpdate") (or .surge .unavailable) }}
+    rollingUpdate:
+        {{- with .unavailable }}
+      maxUnavailable: {{ . }}
+        {{- end }}
+        {{- with .surge }}
+      maxSurge: {{ . }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+
   selector:
     matchLabels:
       {{- include "this.selectorLabels" . | nindent 6 }}

@@ -47,6 +47,16 @@ service:
   # -- Service port
   port: 80
 
+# -- Configure deployment upgrade strategy
+deploymentStrategy:
+  # -- Valid values are Recreate (default) and RollingUpdate.
+  type: Recreate
+  rollingUpdate:
+    # -- Set RollingUpdate max unavailable
+    unavailable:
+    # -- Set RollingUpdate max surge
+    surge:
+
 ingress:
   # -- Specifies whether a ingress resource should be created
   enabled: false
