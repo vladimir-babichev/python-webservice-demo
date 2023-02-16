@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: .
+      args:
+      - "UID=${UID:-1000}"
+      - "GID=${GID:-1000}"
+      - "FLASK_DEBUG=${FLASK_DEBUG:-false}"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql+pymysql://${MYSQL_USER:-user}:${MYSQL_PASSWORD:-password}@mysql/${MYSQL_DATABASE:-db_name}
+    volumes:
+      - .:/app
+    ports:
+      - 8080:5000
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - -c
+        - "import urllib.request as r; r.urlopen('http://127.0.0.1:8000/status').read()"
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-password}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE:-db_name}"
+      MYSQL_USER: "${MYSQL_USER:-user}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-password}"

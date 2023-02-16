@@ -2,6 +2,7 @@ from datetime import date, datetime
 
 from flask import request
 from flask_restful import Resource
+from sqlalchemy.sql import text
 
 from app.database import db
 from app.models import User
@@ -50,3 +51,13 @@ class UserAPI(Resource):
                 f"Hello, {user.username}! Your birthday is in {delta.days} day(s)."
             )
         return {"message": message}
+
+
+class Status(Resource):
+    def get(self):
+        try:
+            db.session.execute(text("SELECT 1"))
+            # db.session.execute("SELECT 1")
+            return {"status": "OK"}
+        except Exception as e:
+            return {"status": "DB connection error", "error": f"{str(e)}"}, 500

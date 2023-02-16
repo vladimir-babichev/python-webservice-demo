@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 
-from app.api import UserAPI
+from app.api import Status, UserAPI
 from app.database import db
 
 
@@ -15,6 +15,7 @@ def create_app():
 
     api = Api(app)
     api.add_resource(UserAPI, "/hello/<username>")
+    api.add_resource(Status, "/status")
 
     return app
 
