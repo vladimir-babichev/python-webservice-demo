@@ -1,0 +1,44 @@
+version: "3"
+
+env:
+  CONTAINER_REGISTRY: ghcr.io/vladimir-babichev
+  APP_NAME: python-webservice-demo
+  APP_VERSION:
+    sh: |
+      cat {{ .ROOT_DIR }}/src/VERSION
+
+tasks:
+  precommit:
+    desc: Execute pre-commit for modified files
+    cmds:
+      - SKIP={{ .PRE_COMMIT_SKIP }} pre-commit run --color=always --show-diff-on-failure --from-ref origin/main --to-ref HEAD
+
+  precommit-all:
+    desc: Execute pre-commit for all files
+    cmds:
+      - SKIP={{ .PRE_COMMIT_SKIP }} pre-commit run --color=always --show-diff-on-failure --all-files
+
+  unittest:
+    desc: Run application unit tests
+    cmds:
+      - cd {{ .ROOT_DIR }}/src && python -m unittest discover
+
+  build:
+    desc: Build Docker Image
+    cmds:
+      - docker build -t {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }} {{ .ROOT_DIR }}/src
+
+  up:
+    desc: docker-compose up
+    cmds:
+      - docker-compose --project-directory {{ .ROOT_DIR }}/src up -d {{ .CLI_ARGS }}
+
+  down:
+    desc: docker-compose down
+    cmds:
+      - docker-compose --project-directory {{ .ROOT_DIR }}/src down {{ .CLI_ARGS }}
+
+  logs:
+    desc: docker-compose logs
+    cmds:
+      - docker-compose --project-directory {{ .ROOT_DIR }}/src logs {{ .CLI_ARGS }}

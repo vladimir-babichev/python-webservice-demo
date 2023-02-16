@@ -1,0 +1,43 @@
+name: pre-commit
+
+on:
+  push:
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Set PY variable to for pre-commit cache
+        run: echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - name: Install pip dependencies
+        run: |
+          pip install -r src/requirements.txt
+          pip install pre-commit
+
+      - name: Run pre-commit
+        id: precommit
+        run: task precommit-all

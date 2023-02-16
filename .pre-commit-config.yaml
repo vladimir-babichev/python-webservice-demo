@@ -34,3 +34,12 @@ repos:
     rev: 23.1.0
     hooks:
       - id: black
+
+  - repo: local
+    hooks:
+      - id: python-unittest
+        name: Python unit tests
+        entry: task
+        language: system
+        pass_filenames: false
+        args: ["unittest"]
