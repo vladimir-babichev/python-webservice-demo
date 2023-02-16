@@ -35,6 +35,13 @@ jobs:
       - name: Install Task
         uses: arduino/setup-task@v1
 
+      - name: Install ShellCheck
+        working-directory: /tmp
+        run: |
+          curl -Lo ./shellcheck.tar.xz "$(curl -s https://api.github.com/repos/koalaman/shellcheck/releases/latest | grep -o -E "https://.+?linux.x86_64.tar.xz")" \
+            && tar -xJf shellcheck.tar.xz \
+            && sudo mv shellcheck-v*/shellcheck /usr/bin/
+
       - name: Install pip dependencies
         run: |
           pip install -r app/requirements.txt

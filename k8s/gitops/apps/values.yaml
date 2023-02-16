@@ -1,0 +1,30 @@
+.appproj-annotations: &x-appproj-annotations
+  annotations:
+    argocd.argoproj.io/sync-wave: "-10"
+global:
+  namespace: gitops
+  project: gitops
+  repo:
+    url: https://github.com/vladimir-babichev/python-webservice-demo
+    revision: HEAD
+
+argocd-apps:
+  applications:
+    argocd:
+      path: k8s/gitops/argocd
+    demo-apps:
+      path: k8s/demo/apps
+    gitops-apps:
+      path: k8s/gitops/apps
+
+  appProjects:
+    demo:
+      <<: *x-appproj-annotations
+      destinations:
+        - namespace: demo
+          server: https://kubernetes.default.svc
+    gitops:
+      <<: *x-appproj-annotations
+      destinations:
+        - namespace: gitops
+          server: https://kubernetes.default.svc

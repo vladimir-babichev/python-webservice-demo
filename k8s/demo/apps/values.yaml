@@ -1,0 +1,15 @@
+global:
+  namespace: demo
+  project: demo
+  repo:
+    url: https://github.com/vladimir-babichev/python-webservice-demo
+    revision: HEAD
+  helm:
+    version: v3
+    valueFiles:
+      - values.yaml
+
+argocd-apps:
+  applications:
+    hello-world:
+      path: k8s/demo/hello-world

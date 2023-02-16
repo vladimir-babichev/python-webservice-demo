@@ -1,0 +1,6 @@
+dependencies:
+- name: argocd-apps
+  repository: https://vladimir-babichev.github.io/helm-charts/
+  version: 1.0.0
+digest: sha256:d045b6662f9a20bf6e6fa75f236d838743150be93a650a4f04f124ca8ce17ed0
+generated: "2023-02-16T23:42:04.112616Z"

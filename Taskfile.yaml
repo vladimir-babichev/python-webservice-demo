@@ -42,3 +42,14 @@ tasks:
     desc: docker-compose logs
     cmds:
       - docker-compose --project-directory {{ .ROOT_DIR }}/app logs {{ .CLI_ARGS }}
+
+  minikube-up:
+    desc: Bootstrap minikube cluster
+    cmds:
+      - minikube start
+      - minikube addons enable ingress
+
+  minikube-down:
+    desc: Delete minikube cluster
+    cmds:
+      - minikube stop

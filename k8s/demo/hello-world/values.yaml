@@ -1,0 +1,14 @@
+fullnameOverride: hello-world
+deploymentStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    unavailable: 40%
+
+ingress:
+  enabled: true
+  className: nginx
+  hosts:
+    - host: hello-world.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
