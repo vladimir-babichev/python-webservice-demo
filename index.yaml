@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  python-webservice-demo:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-02-16T22:10:45.670750436Z"
+    description: A Helm chart for the App
+    digest: c368b226d2b1198bdf6cf02ca5511240c8cbde34f65a9cf4ef1e887308fbb193
+    name: python-webservice-demo
+    type: application
+    urls:
+    - https://github.com/vladimir-babichev/python-webservice-demo/releases/download/python-webservice-demo-0.1.0/python-webservice-demo-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-02-16T22:10:45.670754736Z"
