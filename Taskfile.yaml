@@ -28,17 +28,17 @@ tasks:
     cmds:
       - docker build -t {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }} {{ .ROOT_DIR }}/app
 
-  up:
+  compose-up:
     desc: docker-compose up
     cmds:
       - docker-compose --project-directory {{ .ROOT_DIR }}/app up -d {{ .CLI_ARGS }}
 
-  down:
+  compose-down:
     desc: docker-compose down
     cmds:
       - docker-compose --project-directory {{ .ROOT_DIR }}/app down {{ .CLI_ARGS }}
 
-  logs:
+  compose-logs:
     desc: docker-compose logs
     cmds:
       - docker-compose --project-directory {{ .ROOT_DIR }}/app logs {{ .CLI_ARGS }}
