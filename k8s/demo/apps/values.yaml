@@ -11,5 +11,5 @@ global:
 
 argocd-apps:
   applications:
-    hello-world:
-      path: k8s/demo/hello-world
+    python-webservice-demo:
+      path: k8s/demo/python-webservice-demo

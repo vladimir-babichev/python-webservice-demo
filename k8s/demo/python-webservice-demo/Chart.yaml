@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-name: hello-world
+name: python-webservice-demo
 version: 0.1.0
 
 dependencies:
