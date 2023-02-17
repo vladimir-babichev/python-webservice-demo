@@ -39,7 +39,6 @@ fi
 
 kubens "$namespace"
 
-set -x
 cd "${ROOT_DIR}/k8s/gitops/apps" || fail
 helm repo add vladimir-charts https://vladimir-babichev.github.io/helm-charts/  || fail
 helm dependency build || fail

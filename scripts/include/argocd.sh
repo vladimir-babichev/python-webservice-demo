@@ -43,7 +43,8 @@ kubens "$namespace"
 cd "${ROOT_DIR}/k8s/gitops/argocd/" || fail
 helm repo add argo https://argoproj.github.io/argo-helm  || fail
 helm dependency build || fail
-helm template argocd . | \
+helm template argocd . \
+    --set argo-cd.server.ingress=null | \
     kubectl apply -f - || fail
 
 kubectl rollout status deploy argocd-server -n "$namespace"
