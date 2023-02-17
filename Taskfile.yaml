@@ -8,6 +8,11 @@ env:
       cat {{ .ROOT_DIR }}/app/VERSION
 
 tasks:
+  setup:
+    desc: Setup pre-commit
+    cmds:
+      - pre-commit install --install-hooks
+
   precommit:
     desc: Execute pre-commit for modified files
     cmds:
@@ -23,10 +28,27 @@ tasks:
     cmds:
       - cd {{ .ROOT_DIR }}/app && python -m unittest discover
 
-  build:
+  docker-build:
     desc: Build Docker Image
     cmds:
       - docker build -t {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }} {{ .ROOT_DIR }}/app
+
+  docker-run:
+    desc: Run Docker container
+    cmds:
+      - |
+        docker run \
+          --name {{ .APP_NAME }} \
+          --rm -p 8080:8080 -ti \
+          -e WEB_RELOAD=true \
+          -v {{ .ROOT_DIR }}/app:/app \
+          {{ .CLI_ARGS }} \
+          {{ .CONTAINER_REGISTRY }}/{{ .APP_NAME }}:{{ .APP_VERSION }}
+
+  compose-setup:
+    desc: Setup Docker Compose environment
+    cmds:
+      - cp {{ .ROOT_DIR }}/app/.env.example {{ .ROOT_DIR }}/app/.env
 
   compose-up:
     desc: docker-compose up

@@ -1,0 +1,10 @@
+# https://github.com/DavidAnson/markdownlint/blob/v0.20.4/doc/Rules.md#md013---line-length
+MD013:
+  # Number of characters
+  line_length: 120
+  # Number of characters for headings
+  heading_line_length: 120
+  # Exclude code blocks
+  code_blocks: false
+  # Exclude tables
+  tables: false
