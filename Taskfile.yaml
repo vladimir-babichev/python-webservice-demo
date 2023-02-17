@@ -48,8 +48,9 @@ tasks:
     cmds:
       - minikube start
       - minikube addons enable ingress
+      - "{{ .ROOT_DIR }}/scripts/bootstrap.sh"
 
   minikube-down:
     desc: Delete minikube cluster
     cmds:
-      - minikube stop
+      - minikube delete

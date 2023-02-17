@@ -1,5 +1,9 @@
 python-webservice-demo:
+  fullnameOverride: python-webservice-demo
+
   env:
+    # This connection string used for demo purposes only.
+    # DO NOT use this approach in real environments!
     DATABASE_URL: mysql+pymysql://demo:demo@mysql/demo
 
   deploymentStrategy:

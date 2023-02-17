@@ -1,6 +1,9 @@
 mysql:
+  fullnameOverride: mysql
   auth:
+    # These credentials used for demo purposes only.
+    # DO NOT use this approach in real environments!
     rootPassword: root
-    createDatabase: python-webservice-demo
-    username: python-webservice-demo
-    password: python-webservice-demo
+    database: demo
+    username: demo
+    password: demo

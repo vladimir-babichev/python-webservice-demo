@@ -2,6 +2,7 @@
 .url: &x-url "https://argocd.local"
 
 argo-cd:
+  fullnameOverride: argocd
   configs:
     cm:
       application.instanceLabelKey: argocd.argoproj.io/instance

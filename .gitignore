@@ -36,3 +36,5 @@ venv.bak/
 
 # Misc
 /app/deploy/chart/Chart.yaml
+**/charts/*.tgz
+Chart.lock

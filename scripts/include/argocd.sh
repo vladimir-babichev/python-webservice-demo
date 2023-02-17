@@ -42,6 +42,13 @@ kubens "$namespace"
 
 cd "${ROOT_DIR}/k8s/gitops/argocd/" || fail
 helm repo add argo https://argoproj.github.io/argo-helm  || fail
-helm dependency build  || fail
-helm upgrade -i argocd . \
-    --set externalSecret=null || fail
+helm dependency build || fail
+helm template argocd . | \
+    kubectl apply -f - || fail
+
+kubectl rollout status deploy argocd-server -n "$namespace"
+kubectl rollout status deploy argocd-applicationset-controller -n "$namespace"
+kubectl rollout status deploy argocd-notifications-controller -n "$namespace"
+kubectl rollout status deploy argocd-redis -n "$namespace"
+kubectl rollout status deploy argocd-repo-server -n "$namespace"
+kubectl rollout status deploy argocd-server -n "$namespace"
