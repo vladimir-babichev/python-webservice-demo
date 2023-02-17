@@ -5,5 +5,5 @@ version: 0.1.0
 
 dependencies:
   - name: python-webservice-demo
-    version: 0.3.0
+    version: 0.4.0
     repository: https://vladimir-babichev.github.io/python-webservice-demo/

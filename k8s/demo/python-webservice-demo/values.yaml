@@ -1,4 +1,7 @@
 python-webservice-demo:
+  env:
+    DATABASE_URL: mysql+pymysql://demo:demo@mysql/demo
+
   deploymentStrategy:
     type: RollingUpdate
     rollingUpdate:

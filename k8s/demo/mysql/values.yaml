@@ -1,0 +1,6 @@
+mysql:
+  auth:
+    rootPassword: root
+    createDatabase: python-webservice-demo
+    username: python-webservice-demo
+    password: python-webservice-demo

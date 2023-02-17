@@ -17,6 +17,20 @@ nameOverride: ""
 # -- Chart fullname override
 fullnameOverride: ""
 
+# -- Map of Environment variables pairs defined in a `Key: Value`` format.
+env: {}
+# env:
+#   KEY: value
+#   foo: bar
+
+# -- Secrets and/or ConfigMaps that will be loaded as environment variables.
+envFrom: []
+# envFrom:
+#   - configMapRef:
+#       name: config-map-name
+#   - secretRef:
+#       name: secret-name
+
 serviceAccount:
   # -- Specifies whether a service account should be created
   create: true

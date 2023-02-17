@@ -33,3 +33,6 @@ venv.bak/
 
 # mkdocs documentation
 /site
+
+# Misc
+/app/deploy/chart/Chart.yaml

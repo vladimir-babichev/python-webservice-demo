@@ -13,3 +13,5 @@ argocd-apps:
   applications:
     python-webservice-demo:
       path: k8s/demo/python-webservice-demo
+    mysql:
+      path: k8s/demo/mysql
