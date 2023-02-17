@@ -41,5 +41,7 @@ fi
 kubens "$namespace"
 
 cd "${ROOT_DIR}/k8s/gitops/argocd/" || fail
-helm dependency build || fail
-helm upgrade -i argocd .  || fail
+helm repo add argo https://argoproj.github.io/argo-helm  || fail
+helm dependency build  || fail
+helm upgrade -i argocd . \
+    --set externalSecret=null || fail

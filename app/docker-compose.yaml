@@ -15,13 +15,13 @@ services:
     volumes:
       - .:/app
     ports:
-      - 8080:5000
+      - 8080:8080
     healthcheck:
       test:
         - CMD
         - python3
         - -c
-        - "import urllib.request as r; r.urlopen('http://127.0.0.1:8000/status').read()"
+        - "import urllib.request as r; r.urlopen('http://127.0.0.1:8080/status').read()"
       interval: 30s
       timeout: 10s
       retries: 5
