@@ -1,4 +1,4 @@
-cryptography==39.0.1
+cryptography==39.0.2
 Flask-RESTful==0.3.9
 Flask-SQLAlchemy==3.0.3
 Flask==2.2.2
