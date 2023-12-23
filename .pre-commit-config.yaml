@@ -65,7 +65,7 @@ repos:
           - "--ignore=E501"
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.12.1
     hooks:
       - id: black
         name: Python Black formatter
